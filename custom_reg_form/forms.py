@@ -39,6 +39,7 @@ class ExtraInfoForm(ModelForm):
         self.fields["full_name"].help_text = "Enter your full name."
         self.fields["full_name"].min_length = 3
         self.fields["full_name"].max_length = 100
+        self.fields["full_name"].required = True
         self.fields["full_name"].restrictions = {
             "min_length": 3,
             "max_length": 100,
@@ -48,6 +49,10 @@ class ExtraInfoForm(ModelForm):
         self.fields["bio"].widget = forms.Textarea()
         self.fields["bio"].help_text = "Write a short bio."
         self.fields["bio"].field_type = "textarea"
+        self.fields["bio"].required = True
+        self.fields["bio"].error_messages = {
+            "required": "Please tell us something about yourself",
+        }
 
         # Checkbox
         self.fields["wants_newsletter"].label = "Subscribe to newsletter?"
@@ -62,6 +67,14 @@ class ExtraInfoForm(ModelForm):
             "This will help you remember your password."
         )
         self.fields["password_hint"].placeholder = "Insert a hint"
+        self.fields["password_hint"].min_length = 5
+        self.fields["password_hint"].max_length = 10
+        self.fields["password_hint"].required = True
+        self.fields["password_hint"].error_messages = {
+            "required": "Insert a hint for your password",
+            "min_length": "Hint is too short",
+            "max_length": "Hint is too long",
+        }
 
         # Checkbox with custom message
         self.fields["data_authorization"].error_messages = {
@@ -71,6 +84,8 @@ class ExtraInfoForm(ModelForm):
         # Agreement checkbox
         self.fields["terms_accepted"].label = "I accept the Terms and Conditions"
         self.fields["terms_accepted"].required = True
+        
+        self.fields["favorite_language"].required = True
 
     class Meta:
         model = ExtraInfo
