@@ -61,6 +61,7 @@ class ExtraInfoForm(ModelForm):
         self.fields["password_hint"].help_text = (
             "This will help you remember your password."
         )
+        self.fields["password_hint"].placeholder = "Insert a hint"
 
         # Checkbox with custom message
         self.fields["data_authorization"].error_messages = {
